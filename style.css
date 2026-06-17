@@ -156,4 +156,60 @@ padding:20px;
     margin-bottom:10px;
 }
 ```
+```css
+.contact{
+padding:80px 10%;
+background:#f5f7fa;
+text-align:center;
+}
+
+.contact h2{
+font-size:40px;
+color:#0077ff;
+margin-bottom:10px;
+}
+
+.contact p{
+font-size:18px;
+color:#666;
+margin-bottom:30px;
+}
+
+.contact-box{
+max-width:600px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.contact-box input,
+.contact-box textarea{
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+outline:none;
+}
+
+.contact-box textarea{
+height:150px;
+resize:none;
+}
+
+.contact-box button{
+padding:15px;
+background:#0077ff;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.contact-box button:hover{
+background:#0056d6;
+}
+```
 
