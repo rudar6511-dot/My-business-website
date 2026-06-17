@@ -253,3 +253,25 @@ body{
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
+```css
+details{
+    margin-top:15px;
+}
+
+summary{
+    color:#0077ff;
+    font-weight:bold;
+    cursor:pointer;
+    list-style:none;
+}
+
+summary:hover{
+    color:#0056d6;
+}
+
+details p{
+    margin-top:10px;
+    color:#555;
+    line-height:25px;
+}
+```
