@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="6" y="12" width="52" height="32" rx="2" fill="#0b6efd"/>
+  <rect x="10" y="16" width="44" height="24" rx="1" fill="#fff"/>
+  <rect x="14" y="20" width="8" height="2" rx="1" fill="#dbeafe"/>
+  <rect x="24" y="20" width="20" height="2" rx="1" fill="#dbeafe"/>
+  <rect x="14" y="24" width="30" height="8" rx="1" fill="#f8fafc"/>
+  <rect x="26" y="44" width="12" height="4" rx="1" fill="#374151"/>
+  <title>Web Design</title>
+</svg>

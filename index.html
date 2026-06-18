@@ -64,195 +64,21 @@
 
         <div class="cards">
           <article class="card" aria-labelledby="webdesign-title">
-            <img src="images/web.png" alt="Web Design icon" width="70" height="70" />
+            <img src="images/web.svg" alt="Web Design icon" width="70" height="70" />
             <h3 id="webdesign-title">Web Design</h3>
             <p>Modern responsive websites with user-focused interfaces and fast performance.</p>
             <a class="read-btn" href="webdesign.html">Read More</a>
           </article>
 
           <article class="card" aria-labelledby="marketing-title">
-            <img src="images/marketing.png" alt="Digital Marketing icon" width="70" height="70" />
+            <img src="images/marketing.svg" alt="Digital Marketing icon" width="70" height="70" />
             <h3 id="marketing-title">Digital Marketing</h3>
             <p>SEO, social media and paid advertising strategies to grow traffic and sales.</p>
             <a class="read-btn" href="marketing.html">Read More</a>
           </article>
 
           <article class="card" aria-labelledby="consulting-title">
-            <img src="images/business.png" alt="Business Consulting icon" width="70" height="70" />
-            <h3 id="consulting-title">Business Consulting</h3>
-            <p>Practical business advice and plans to accelerate growth and profitability.</p>
-            <a class="read-btn" href="consulting.html">Read More</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="order" class="order">
-      <div class="container">
-        <h2>Order a Logo</h2>
-        <p class="section-sub">Fill the form to place a logo order. We will contact you within 24 hours.</p>
-
-        <form class="form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate>
-          <label for="o-name">Your Name</label>
-          <input id="o-name" name="name" type="text" placeholder="Your Name" required>
-
-          <label for="o-email">Email</label>
-          <input id="o-email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="o-whatsapp">WhatsApp Number</label>
-          <input id="o-whatsapp" name="whatsapp" type="tel" placeholder="+1234567890" required>
-
-          <label for="o-business">Business Name</label>
-          <input id="o-business" name="business" type="text" placeholder="Business Name" required>
-
-          <label for="o-style">Logo Style</label>
-          <select id="o-style" name="style" required>
-            <option value="">Select Logo Style</option>
-            <option>Minimal</option>
-            <option>Modern</option>
-            <option>Luxury</option>
-            <option>3D</option>
-            <option>Vintage</option>
-          </select>
-
-          <label for="o-details">Logo Details</label>
-          <textarea id="o-details" name="details" placeholder="Describe your idea (colors, symbols, usage)..." rows="5"></textarea>
-
-          <!-- Optional: redirect after submit -->
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://your-domain.example/thank-you.html">
-
-          <button class="btn primary" type="submit">Place Order</button>
-        </form>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Contact Us</h2>
-        <p class="section-sub">Have questions? Send a message and we'll respond shortly.</p>
-
-        <form class="form contact-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate>
-          <label for="c-name">Name</label>
-          <input id="c-name" name="name" type="text" placeholder="Your Name" required>
-
-          <label for="c-email">Email</label>
-          <input id="c-email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="c-subject">Subject</label>
-          <input id="c-subject" name="subject" type="text" placeholder="Subject">
-
-          <label for="c-message">Message</label>
-          <textarea id="c-message" name="message" placeholder="Your message..." rows="6" required></textarea>
-
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://your-domain.example/thank-you.html">
-
-          <button class="btn primary" type="submit">Send Message</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 My Business — All Rights Reserved</p>
-      <nav aria-label="Footer">
-        <ul>
-          <li><a href="/privacy.html">Privacy</a></li>
-          <li><a href="/terms.html">Terms</a></li>
-        </ul>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- Optional: small script for accessibility (menu toggle) -->
-  <script>
-    // Minimal JS placeholder — add interactive behavior in a separate file if needed.
-    document.documentElement.lang = document.documentElement.lang || 'en';
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Professional website design, digital marketing and business consulting to help you build and grow your business." />
-  <meta name="author" content="My Business" />
-  <title>My Business — Website Design · Digital Marketing · Consulting</title>
-
-  <!-- Open Graph (for sharing preview) -->
-  <meta property="og:title" content="My Business — Website Design & Digital Solutions" />
-  <meta property="og:description" content="Modern websites, digital marketing and business consulting to grow your brand." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://your-domain.example/" />
-  <meta property="og:image" content="images/og-image.png" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Optional: Google font -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <meta name="theme-color" content="#0b6efd">
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <a href="/" aria-label="My Business home">
-          <span class="logo">MY BUSINESS</span>
-        </a>
-      </div>
-
-      <nav class="site-nav" aria-label="Primary navigation">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#order">Order</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <section id="home" class="hero">
-      <div class="container hero-inner">
-        <h1>Build Your Dream Business</h1>
-        <p class="lead">Professional website design, digital marketing, and business consulting to help you grow.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#services">Our Services</a>
-          <a class="btn outline" href="#contact">Get a Quote</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="services">
-      <div class="container">
-        <h2>Our Services</h2>
-        <p class="section-sub">Tailored solutions that deliver measurable results.</p>
-
-        <div class="cards">
-          <article class="card" aria-labelledby="webdesign-title">
-            <img src="images/web.png" alt="Web Design icon" width="70" height="70" />
-            <h3 id="webdesign-title">Web Design</h3>
-            <p>Modern responsive websites with user-focused interfaces and fast performance.</p>
-            <a class="read-btn" href="webdesign.html">Read More</a>
-          </article>
-
-          <article class="card" aria-labelledby="marketing-title">
-            <img src="images/marketing.png" alt="Digital Marketing icon" width="70" height="70" />
-            <h3 id="marketing-title">Digital Marketing</h3>
-            <p>SEO, social media and paid advertising strategies to grow traffic and sales.</p>
-            <a class="read-btn" href="marketing.html">Read More</a>
-          </article>
-
-          <article class="card" aria-labelledby="consulting-title">
-            <img src="images/business.png" alt="Business Consulting icon" width="70" height="70" />
+            <img src="images/business.svg" alt="Business Consulting icon" width="70" height="70" />
             <h3 id="consulting-title">Business Consulting</h3>
             <p>Practical business advice and plans to accelerate growth and profitability.</p>
             <a class="read-btn" href="consulting.html">Read More</a>
