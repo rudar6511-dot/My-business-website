@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <title>My Business — og image</title>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#0b6efd"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)" />
+  <g fill="#ffffff" font-family="Inter, Arial, sans-serif">
+    <text x="60" y="220" font-size="64" font-weight="700">My Business</text>
+    <text x="60" y="300" font-size="36">Website Design · Digital Marketing · Consulting</text>
+
+    <rect x="60" y="360" width="320" height="56" rx="6" fill="#ffffff" fill-opacity="0.12" />
+    <text x="80" y="398" font-size="20">Get a free quote — contact us</text>
+  </g>
+</svg>
