@@ -251,12 +251,24 @@
 
           var fd = new FormData(form);
 
+          // remove any previous messages
+          var prev = form.parentNode.querySelector('.form-success, .form-error');
+          if(prev) prev.remove();
+
           fetch(ajaxUrl, {
             method: 'POST',
             body: fd,
             headers: { 'Accept': 'application/json' }
           })
-          .then(function(response){ return response.json(); })
+          .then(function(response){
+            if(!response.ok){
+              return response.text().then(function(text){ throw { status: response.status, body: text }; });
+            }
+            // try parse json, fall back to text
+            return response.text().then(function(text){
+              try{ return JSON.parse(text); }catch(e){ return { message: text }; }
+            });
+          })
           .then(function(data){
             // show success message
             var msg = document.createElement('div');
@@ -278,13 +290,32 @@
             form.reset();
             if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = origText; }
           })
-          .catch(function(error){
-            console.error('Form submit error:', error);
-            alert('Submission failed. Please try again or contact us directly.');
+          .catch(function(err){
+            console.error('Form submit error:', err);
+            var emsg = document.createElement('div');
+            emsg.className = 'form-error';
+            emsg.style.padding = '12px';
+            emsg.style.marginTop = '12px';
+            emsg.style.background = '#fff1f2';
+            emsg.style.border = '1px solid #f43f5e';
+            emsg.style.color = '#9f1239';
+            if(err && err.status){
+              // Common cause: email not verified (Formsubmit returns 403/422)
+              emsg.innerHTML = '<strong>Submission failed (status: ' + err.status + ').</strong> Please ensure your email (rudar6511@gmail.com) is verified with formsubmit.co and try again.' + (err.body ? '<br><small>' + escapeHtml(err.body) + '</small>' : '');
+            } else {
+              emsg.textContent = 'Submission failed. Please try again or contact us directly.';
+            }
+            form.parentNode.insertBefore(emsg, form.nextSibling);
             if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = origText; }
           });
         });
       });
+
+      // helper to escape HTML when showing server response
+      function escapeHtml(str){
+        if(!str) return '';
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+      }
     })();
   </script>
 
