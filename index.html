@@ -101,25 +101,25 @@
         <div class="pricing-cards">
           <div class="pricing-card">
             <h3>Minimal Logo</h3>
-            <p class="price">₹50</p>
+            <p class="price">₹1,600</p>
             <p>Simple, clean, and modern — suitable for web and social use.</p>
           </div>
 
           <div class="pricing-card">
             <h3>Vintage Logo</h3>
-            <p class="price">₹70</p>
+            <p class="price">₹3,200</p>
             <p>Classic, timeless designs with retro elements and textures.</p>
           </div>
 
           <div class="pricing-card">
             <h3>3D Logo</h3>
-            <p class="price">₹100</p>
+            <p class="price">₹4,000</p>
             <p>Stylized 3D look for stronger visual presence (digital use).</p>
           </div>
 
           <div class="pricing-card">
             <h3>Luxury Logo</h3>
-            <p class="price">₹150</p>
+            <p class="price">₹6,000</p>
             <p>High-end, detailed logos with premium styling for brands.</p>
           </div>
         </div>
@@ -133,7 +133,7 @@
         <h2>Order a Logo</h2>
         <p class="section-sub">Fill the form to place a logo order. We will contact you within 24 hours.</p>
 
-        <form class="form order-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate>
+        <form class="form order-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate enctype="multipart/form-data">
           <label for="o-name">Your Name</label>
           <input id="o-name" name="name" type="text" placeholder="Your Name" required>
 
@@ -153,6 +153,48 @@
             <option value="3D" data-price="4000">3D — ₹4,000</option>
             <option value="Luxury" data-price="6000">Luxury — ₹6,000</option>
           </select>
+
+          <!-- New: Color selection -->
+          <fieldset>
+            <legend>Preferred Colors</legend>
+            <label for="o-primary-color">Primary color</label>
+            <input id="o-primary-color" name="primary_color" type="color" value="#0b6efd">
+
+            <label for="o-secondary-color">Secondary color</label>
+            <input id="o-secondary-color" name="secondary_color" type="color" value="#ffffff">
+
+            <label for="o-color-notes">Other color notes</label>
+            <input id="o-color-notes" name="color_notes" type="text" placeholder="E.g. brand colors, avoid neon, prefer muted tones">
+          </fieldset>
+
+          <!-- New: Shape selection -->
+          <label for="o-shape">Preferred logo shape</label>
+          <select id="o-shape" name="shape">
+            <option value="Any">Any</option>
+            <option value="Wordmark">Wordmark (text based)</option>
+            <option value="Lettermark">Lettermark / Monogram</option>
+            <option value="Emblem">Emblem / Badge</option>
+            <option value="Abstract">Abstract mark</option>
+            <option value="Icon">Icon / Symbol</option>
+            <option value="Mascot">Mascot</option>
+            <option value="Combination">Combination mark</option>
+          </select>
+
+          <!-- New: Design elements (checkboxes) -->
+          <fieldset>
+            <legend>Design elements you'd like</legend>
+            <label><input type="checkbox" name="elements" value="Monogram"> Monogram / Initials</label>
+            <label><input type="checkbox" name="elements" value="Symbol"> Symbol / Icon</label>
+            <label><input type="checkbox" name="elements" value="Mascot"> Mascot</label>
+            <label><input type="checkbox" name="elements" value="Typography"> Typography-focused</label>
+            <label><input type="checkbox" name="elements" value="Badge"> Badge / Emblem</label>
+            <label><input type="checkbox" name="elements" value="Minimal"> Minimal / Flat</label>
+            <label><input type="checkbox" name="elements" value="3D"> 3D / Gradient</label>
+          </fieldset>
+
+          <!-- New: Reference upload -->
+          <label for="o-references">Reference images (optional)</label>
+          <input id="o-references" name="references" type="file" accept="image/*" multiple>
 
           <p>Selected package price: <strong id="selected-price">₹1,600</strong></p>
           <input type="hidden" name="price" id="o-price" value="1600">
