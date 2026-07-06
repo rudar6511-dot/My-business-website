@@ -362,3 +362,102 @@ cursor:pointer;
 background:#0056d6;
 }
 ```
+.portfolio{
+  padding:80px 10%;
+  text-align:center;
+  background:#ffffff;
+}
+
+.portfolio h2{
+  font-size:38px;
+  color:#0077ff;
+  margin-bottom:10px;
+}
+
+.portfolio p{
+  color:#666;
+  margin-bottom:30px;
+}
+
+.logo-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:25px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.logo-sample{
+  background:#f7f9fc;
+  padding:25px 18px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  transition:0.3s;
+}
+
+.logo-sample:hover{
+  transform:translateY(-8px);
+}
+
+.sample-logo{
+  height:150px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  color:white;
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.tech-logo{
+  background:linear-gradient(135deg,#1d4ed8,#06b6d4);
+}
+
+.food-logo{
+  background:linear-gradient(135deg,#f97316,#ef4444);
+  font-family:cursive;
+}
+
+.fashion-logo{
+  background:linear-gradient(135deg,#111827,#6b21a8);
+  font-family:Georgia, serif;
+}
+
+.shop-logo{
+  background:linear-gradient(135deg,#059669,#14b8a6);
+  font-size:22px;
+}
+
+.fitness-logo{
+  background:linear-gradient(135deg,#dc2626,#f59e0b);
+}
+
+.travel-logo{
+  background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  font-size:20px;
+}
+
+.logo-sample h3{
+  font-size:22px;
+  margin:10px 0;
+}
+
+.logo-sample p{
+  margin:0;
+  font-size:15px;
+}
+
+@media(max-width:800px){
+  .logo-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
+@media(max-width:500px){
+  .logo-grid{
+    grid-template-columns:1fr;
+  }
+}
