@@ -461,3 +461,11 @@ background:#0056d6;
     grid-template-columns:1fr;
   }
 }
+.portfolio-image{
+  width:100%;
+  max-width:1200px;
+  display:block;
+  margin:30px auto 0;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
