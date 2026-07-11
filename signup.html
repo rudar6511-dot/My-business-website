@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+
+<script type="module">
+
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabase=createClient(
+"https://yefjfcrevavskvxzkkub.supabase.co",
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGIuWajAfhLhiUE"
+);
+
+window.signup=async()=>{
+
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+
+const {error}=await supabase.auth.signUp({
+email,
+password
+});
+
+if(error){
+alert(error.message);
+}else{
+alert("Account Created Successfully! Check your Email.");
+window.location="login.html";
+}
+
+}
+
+</script>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0077ff;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:30px;
+width:350px;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#0077ff;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+a{
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="signup()">Sign Up</button>
+
+<p>Already have an account?
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
+</body>
+</html>
