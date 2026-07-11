@@ -469,3 +469,21 @@ background:#0056d6;
   border-radius:18px;
   box-shadow:0 8px 25px rgba(0,0,0,0.15);
 }
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-size:18px;
+}
+
+.signup-btn{
+    background:#0077ff;
+    padding:10px 20px;
+    border-radius:25px;
+}
