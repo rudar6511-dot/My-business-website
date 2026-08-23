@@ -13,30 +13,27 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGQ2c0h0Ng3d1aI"
 );
 
-// Store email & OTP form state in window
 window.authState = {
   email: null,
   otpSent: false
 };
 
-// Gmail enter karte hi OTP automatically send ho
-window.sendOTPAuto = async (event) => {
+window.sendOTP = async () => {
   const email = document.getElementById("email").value.trim();
+  const sendBtn = document.getElementById("send-btn");
   
-  // Check if email is valid
   if (!email || !email.includes("@")) {
+    alert("Please enter a valid email");
     return;
   }
 
-  // Only send once per email
-  if (window.authState.otpSent === true && window.authState.email === email) {
-    return;
-  }
-
-  window.authState.email = email;
+  sendBtn.disabled = true;
+  sendBtn.textContent = "Sending...";
   
   try {
-    const { error } = await supabase.auth.signInWithOtp({
+    console.log("Sending OTP to:", email);
+    
+    const { data, error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
         emailRedirectTo: window.location.origin + window.location.pathname.replace('login.html', 'dashboard.html')
@@ -44,26 +41,39 @@ window.sendOTPAuto = async (event) => {
     });
 
     if (error) {
-      console.log("OTP Error:", error.message);
+      console.error("OTP Error:", error);
+      alert("Error: " + error.message);
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send OTP";
     } else {
+      console.log("OTP sent successfully");
+      window.authState.email = email;
       window.authState.otpSent = true;
+      
       // Show OTP input form
       document.getElementById("email-form").style.display = "none";
       document.getElementById("otp-form").style.display = "block";
+      document.getElementById("email-display").textContent = email;
       document.getElementById("otp-input").focus();
+      
+      alert("✅ OTP sent! Check your email.");
+      sendBtn.textContent = "Send OTP";
+      sendBtn.disabled = false;
     }
   } catch (err) {
-    console.log("Exception:", err);
+    console.error("Exception:", err);
+    alert("Failed to send OTP. Please check your internet and try again.");
+    sendBtn.disabled = false;
+    sendBtn.textContent = "Send OTP";
   }
 };
 
-// OTP verify karna
 window.verifyOTP = async () => {
   const otp = document.getElementById("otp-input").value.trim();
   const email = window.authState.email;
 
   if (!otp || otp.length < 6) {
-    alert("Please enter a valid OTP");
+    alert("Please enter a valid 6-digit OTP");
     return;
   }
 
@@ -71,6 +81,8 @@ window.verifyOTP = async () => {
   document.getElementById("verify-btn").textContent = "Verifying...";
 
   try {
+    console.log("Verifying OTP for:", email);
+    
     const { data, error } = await supabase.auth.verifyOtp({
       email: email,
       token: otp,
@@ -78,23 +90,23 @@ window.verifyOTP = async () => {
     });
 
     if (error) {
+      console.error("Verification Error:", error);
       alert("Invalid OTP: " + error.message);
       document.getElementById("verify-btn").disabled = false;
       document.getElementById("verify-btn").textContent = "Verify OTP";
     } else {
-      // OTP verified successfully
-      alert("Login successful!");
-      // Redirect to dashboard
+      console.log("OTP verified successfully");
+      alert("✅ Login successful!");
       window.location.href = "dashboard.html";
     }
   } catch (err) {
+    console.error("Verification Exception:", err);
     alert("Verification failed: " + err.message);
     document.getElementById("verify-btn").disabled = false;
     document.getElementById("verify-btn").textContent = "Verify OTP";
   }
 };
 
-// Go back to email form
 window.goBackToEmail = () => {
   document.getElementById("otp-form").style.display = "none";
   document.getElementById("email-form").style.display = "block";
@@ -102,11 +114,14 @@ window.goBackToEmail = () => {
   window.authState.otpSent = false;
 };
 
-// Check if already logged in
 window.addEventListener('load', async () => {
-  const { data } = await supabase.auth.getSession();
-  if (data.session) {
-    window.location.href = "dashboard.html";
+  try {
+    const { data } = await supabase.auth.getSession();
+    if (data.session) {
+      window.location.href = "dashboard.html";
+    }
+  } catch (err) {
+    console.error("Session check error:", err);
   }
 });
 
@@ -228,16 +243,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.secondary-btn {
-  background: #f0f0f0;
-  color: #333;
-  margin-top: 10px;
-}
-
-.secondary-btn:hover:not(:disabled) {
-  background: #e0e0e0;
-}
-
 .back-btn {
   text-align: center;
   margin-top: 15px;
@@ -288,6 +293,7 @@ button:disabled {
   cursor: pointer;
   font-size: 14px;
   margin: 0;
+  width: auto;
 }
 
 .resend-link button:hover {
@@ -300,7 +306,7 @@ button:disabled {
   }
 
   input {
-    font-size: 16px; /* Prevent zoom on iOS */
+    font-size: 16px;
   }
 }
 </style>
@@ -323,10 +329,11 @@ button:disabled {
           type="email" 
           id="email" 
           placeholder="Enter your email"
-          oninput="window.sendOTPAuto()"
           autocomplete="email"
           required>
       </div>
+
+      <button id="send-btn" onclick="window.sendOTP()">Send OTP 📧</button>
     </div>
 
     <!-- OTP Form -->
@@ -350,32 +357,19 @@ button:disabled {
           required>
       </div>
 
-      <button id="verify-btn" onclick="window.verifyOTP()">Verify OTP</button>
+      <button id="verify-btn" onclick="window.verifyOTP()">Verify OTP ✓</button>
       
       <div class="back-btn">
         <button onclick="window.goBackToEmail()">← Change Email</button>
       </div>
 
       <div class="resend-link">
-        <p>Didn't receive OTP? <button onclick="window.sendOTPAuto()">Resend</button></p>
+        <p>Didn't receive OTP? <button onclick="window.sendOTP()">Resend</button></p>
       </div>
     </div>
 
   </div>
 </div>
-
-<script>
-// Show email when OTP form appears
-document.addEventListener('DOMContentLoaded', () => {
-  const otp = document.getElementById('otp-form');
-  const observer = new MutationObserver(() => {
-    if (otp.style.display !== 'none' && window.authState.email) {
-      document.getElementById('email-display').textContent = window.authState.email;
-    }
-  });
-  observer.observe(otp, { attributes: true });
-});
-</script>
 
 </body>
 </html>
