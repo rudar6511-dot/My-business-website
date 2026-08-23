@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OTP Login</title>
+<title>Login</title>
 
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
@@ -13,118 +13,45 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGQ2c0h0Ng3d1aI"
 );
 
-window.authState = {
-  email: null,
-  otpSent: false
-};
-
-window.sendOTP = async () => {
+window.login = async () => {
   const email = document.getElementById("email").value.trim();
-  const sendBtn = document.getElementById("send-btn");
-  
-  if (!email || !email.includes("@")) {
-    alert("Please enter a valid email");
+  const password = document.getElementById("password").value.trim();
+  const loginBtn = document.getElementById("login-btn");
+
+  if (!email || !password) {
+    alert("Please enter email and password");
     return;
   }
 
-  sendBtn.disabled = true;
-  sendBtn.textContent = "Sending...";
-  
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Logging in...";
+
   try {
-    console.log("Sending OTP to:", email);
-    
-    const { data, error } = await supabase.auth.signInWithOtp({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
-      options: {
-        emailRedirectTo: window.location.origin + window.location.pathname.replace('login.html', 'dashboard.html')
-      }
+      password: password
     });
 
     if (error) {
-      console.error("OTP Error:", error);
-      alert("Error: " + error.message);
-      sendBtn.disabled = false;
-      sendBtn.textContent = "Send OTP";
+      alert("Login failed: " + error.message);
     } else {
-      console.log("OTP sent successfully");
-      window.authState.email = email;
-      window.authState.otpSent = true;
-      
-      // Show OTP input form
-      document.getElementById("email-form").style.display = "none";
-      document.getElementById("otp-form").style.display = "block";
-      document.getElementById("email-display").textContent = email;
-      document.getElementById("otp-input").focus();
-      
-      alert("✅ OTP sent! Check your email.");
-      sendBtn.textContent = "Send OTP";
-      sendBtn.disabled = false;
-    }
-  } catch (err) {
-    console.error("Exception:", err);
-    alert("Failed to send OTP. Please check your internet and try again.");
-    sendBtn.disabled = false;
-    sendBtn.textContent = "Send OTP";
-  }
-};
-
-window.verifyOTP = async () => {
-  const otp = document.getElementById("otp-input").value.trim();
-  const email = window.authState.email;
-
-  if (!otp || otp.length < 6) {
-    alert("Please enter a valid 6-digit OTP");
-    return;
-  }
-
-  document.getElementById("verify-btn").disabled = true;
-  document.getElementById("verify-btn").textContent = "Verifying...";
-
-  try {
-    console.log("Verifying OTP for:", email);
-    
-    const { data, error } = await supabase.auth.verifyOtp({
-      email: email,
-      token: otp,
-      type: 'email'
-    });
-
-    if (error) {
-      console.error("Verification Error:", error);
-      alert("Invalid OTP: " + error.message);
-      document.getElementById("verify-btn").disabled = false;
-      document.getElementById("verify-btn").textContent = "Verify OTP";
-    } else {
-      console.log("OTP verified successfully");
       alert("✅ Login successful!");
       window.location.href = "dashboard.html";
     }
   } catch (err) {
-    console.error("Verification Exception:", err);
-    alert("Verification failed: " + err.message);
-    document.getElementById("verify-btn").disabled = false;
-    document.getElementById("verify-btn").textContent = "Verify OTP";
+    alert("Error: " + err.message);
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Login";
   }
-};
-
-window.goBackToEmail = () => {
-  document.getElementById("otp-form").style.display = "none";
-  document.getElementById("email-form").style.display = "block";
-  document.getElementById("email").focus();
-  window.authState.otpSent = false;
 };
 
 window.addEventListener('load', async () => {
-  try {
-    const { data } = await supabase.auth.getSession();
-    if (data.session) {
-      window.location.href = "dashboard.html";
-    }
-  } catch (err) {
-    console.error("Session check error:", err);
+  const { data } = await supabase.auth.getSession();
+  if (data.session) {
+    window.location.href = "dashboard.html";
   }
 });
-
 </script>
 
 <style>
@@ -243,60 +170,25 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.back-btn {
+.link-section {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
 }
 
-.back-btn button {
-  margin: 0;
-  width: auto;
-  padding: 10px 20px;
-  background: none;
+.link-section p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.link-section a {
   color: #0077ff;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.back-btn button:hover {
-  background: none;
-  transform: none;
-  box-shadow: none;
-}
-
-.otp-info {
-  background: #f0f8ff;
-  border-left: 4px solid #0077ff;
-  padding: 12px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  color: #333;
-}
-
-#otp-form {
-  display: none;
-}
-
-.resend-link {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-  color: #666;
-}
-
-.resend-link button {
-  background: none;
-  border: none;
-  color: #0077ff;
-  text-decoration: underline;
-  padding: 0;
-  cursor: pointer;
-  font-size: 14px;
-  margin: 0;
-  width: auto;
-}
-
-.resend-link button:hover {
+.link-section a:hover {
   text-decoration: underline;
 }
 
@@ -317,57 +209,35 @@ button:disabled {
 
 <div class="container">
   <div class="box">
-
-    <!-- Email Form -->
-    <div id="email-form">
-      <h2>🔐 Login</h2>
-      <p>Enter your email to receive an OTP</p>
-      
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input 
-          type="email" 
-          id="email" 
-          placeholder="Enter your email"
-          autocomplete="email"
-          required>
-      </div>
-
-      <button id="send-btn" onclick="window.sendOTP()">Send OTP 📧</button>
+    <h2>🔐 Login</h2>
+    <p>Sign in to your account</p>
+    
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input 
+        type="email" 
+        id="email" 
+        placeholder="your@email.com"
+        autocomplete="email"
+        required>
     </div>
 
-    <!-- OTP Form -->
-    <div id="otp-form">
-      <h2>✅ Verify OTP</h2>
-      <p>Check your email for the OTP</p>
-      
-      <div class="otp-info">
-        <strong>OTP sent to:</strong> <span id="email-display"></span>
-      </div>
-      
-      <div class="form-group">
-        <label for="otp-input">Enter 6-digit OTP</label>
-        <input 
-          type="text" 
-          id="otp-input" 
-          placeholder="000000"
-          maxlength="6"
-          inputmode="numeric"
-          autocomplete="one-time-code"
-          required>
-      </div>
-
-      <button id="verify-btn" onclick="window.verifyOTP()">Verify OTP ✓</button>
-      
-      <div class="back-btn">
-        <button onclick="window.goBackToEmail()">← Change Email</button>
-      </div>
-
-      <div class="resend-link">
-        <p>Didn't receive OTP? <button onclick="window.sendOTP()">Resend</button></p>
-      </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        placeholder="Your password"
+        autocomplete="current-password"
+        required>
     </div>
 
+    <button id="login-btn" onclick="window.login()">Login 🔑</button>
+
+    <div class="link-section">
+      <p>Don't have an account?</p>
+      <a href="signup.html">Create an account →</a>
+    </div>
   </div>
 </div>
 
