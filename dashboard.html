@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabase = createClient(
+  "https://yefjfcrevavskvxzkkub.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGQ2c0h0Ng3d1aI"
+);
+
+window.loadUser = async () => {
+  const { data, error } = await supabase.auth.getSession();
+  
+  if (error || !data.session) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const user = data.session.user;
+  const email = user.email;
+
+  document.getElementById("user-email").textContent = email;
+
+  const initials = getInitials(email);
+  const avatarColor = getColorFromEmail(email);
+  
+  document.getElementById("avatar-text").textContent = initials;
+  document.getElementById("user-avatar").style.background = avatarColor;
+
+  const userName = user.user_metadata?.name || email.split("@")[0];
+  document.getElementById("user-name").textContent = userName;
+};
+
+function getInitials(email) {
+  const name = email.split("@")[0];
+  const parts = name.split(".");
+  return parts.map(p => p[0]).join("").toUpperCase().substring(0, 2);
+}
+
+function getColorFromEmail(email) {
+  const colors = [
+    "#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A", "#98D8C8",
+    "#6C5CE7", "#A29BFE", "#FD79A8", "#FDCB6E", "#6C7A7F"
+  ];
+  let hash = 0;
+  for (let i = 0; i < email.length; i++) {
+    hash = email.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return colors[Math.abs(hash) % colors.length];
+}
+
+window.logout = async () => {
+  await supabase.auth.signOut();
+  window.location.href = "login.html";
+};
+
+window.addEventListener('load', window.loadUser);
+
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dashboard-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.content {
+  padding: 40px 30px;
+}
+
+.profile-card {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#avatar-text {
+  display: block;
+}
+
+.user-info h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.user-info p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.email-label {
+  color: #999;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-logout {
+  background: #ff6b6b;
+  color: white;
+}
+
+.btn-logout:hover {
+  background: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+.welcome-message {
+  background: #e7f3ff;
+  border-left: 4px solid #667eea;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.welcome-message p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  color: #666;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 30px 20px;
+  }
+
+  .content {
+    padding: 30px 20px;
+  }
+
+  .profile-card {
+    padding: 20px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+  
+  <div class="header">
+    <h1>Welcome! 👋</h1>
+    <p>Your Dashboard</p>
+  </div>
+
+  <div class="content">
+    
+    <div class="welcome-message">
+      <p>✅ You are successfully logged in. Your profile information is displayed below.</p>
+    </div>
+
+    <div class="profile-card">
+      <div id="user-avatar">
+        <span id="avatar-text">--</span>
+      </div>
+      <div class="user-info">
+        <h2 id="user-name">User Name</h2>
+        <p class="email-label">Email Address</p>
+        <p id="user-email">user@example.com</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="index.html" class="btn btn-primary">← Back to Home</a>
+      <button onclick="window.logout()" class="btn btn-logout">Logout 🚪</button>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>© 2026 My Business — Secure Dashboard</p>
+  </div>
+
+</div>
+
+</body>
+</html>
