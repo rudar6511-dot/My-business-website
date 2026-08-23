@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OTP Login</title>
 
 <script type="module">
@@ -9,60 +10,298 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const supabase = createClient(
   "https://yefjfcrevavskvxzkkub.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGIuWajAfhLhiUE"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGQ2c0h0Ng3d1aI"
 );
 
-window.sendOTP = async () => {
+// Store email & OTP form state in window
+window.authState = {
+  email: null,
+  otpSent: false
+};
 
-  const email = document.getElementById("email").value;
+// Gmail enter karte hi OTP automatically send ho
+window.sendOTPAuto = async (event) => {
+  const email = document.getElementById("email").value.trim();
+  
+  // Check if email is valid
+  if (!email || !email.includes("@")) {
+    return;
+  }
 
-  const { error } = await supabase.auth.signInWithOtp({
-    email: email,
-    options: {
-      emailRedirectTo: "https://rudar6511-dot.github.io/My-business-website/dashboard.html"
+  // Only send once per email
+  if (window.authState.otpSent === true && window.authState.email === email) {
+    return;
+  }
+
+  window.authState.email = email;
+  
+  try {
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email,
+      options: {
+        emailRedirectTo: window.location.origin + window.location.pathname.replace('login.html', 'dashboard.html')
+      }
+    });
+
+    if (error) {
+      console.log("OTP Error:", error.message);
+    } else {
+      window.authState.otpSent = true;
+      // Show OTP input form
+      document.getElementById("email-form").style.display = "none";
+      document.getElementById("otp-form").style.display = "block";
+      document.getElementById("otp-input").focus();
     }
-  });
-
-  if (error) {
-    alert(error.message);
-  } else {
-    alert("OTP / Magic Link has been sent to your email.");
+  } catch (err) {
+    console.log("Exception:", err);
   }
 };
+
+// OTP verify karna
+window.verifyOTP = async () => {
+  const otp = document.getElementById("otp-input").value.trim();
+  const email = window.authState.email;
+
+  if (!otp || otp.length < 6) {
+    alert("Please enter a valid OTP");
+    return;
+  }
+
+  document.getElementById("verify-btn").disabled = true;
+  document.getElementById("verify-btn").textContent = "Verifying...";
+
+  try {
+    const { data, error } = await supabase.auth.verifyOtp({
+      email: email,
+      token: otp,
+      type: 'email'
+    });
+
+    if (error) {
+      alert("Invalid OTP: " + error.message);
+      document.getElementById("verify-btn").disabled = false;
+      document.getElementById("verify-btn").textContent = "Verify OTP";
+    } else {
+      // OTP verified successfully
+      alert("Login successful!");
+      // Redirect to dashboard
+      window.location.href = "dashboard.html";
+    }
+  } catch (err) {
+    alert("Verification failed: " + err.message);
+    document.getElementById("verify-btn").disabled = false;
+    document.getElementById("verify-btn").textContent = "Verify OTP";
+  }
+};
+
+// Go back to email form
+window.goBackToEmail = () => {
+  document.getElementById("otp-form").style.display = "none";
+  document.getElementById("email-form").style.display = "block";
+  document.getElementById("email").focus();
+  window.authState.otpSent = false;
+};
+
+// Check if already logged in
+window.addEventListener('load', async () => {
+  const { data } = await supabase.auth.getSession();
+  if (data.session) {
+    window.location.href = "dashboard.html";
+  }
+});
+
 </script>
 
 <style>
-body{
-font-family:Arial;
-background:#0077ff;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.box{
-background:#fff;
-padding:30px;
-width:350px;
-border-radius:12px;
-text-align:center;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0077ff 0%, #00d4ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-input{
-width:100%;
-padding:12px;
-margin:15px 0;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-button{
-width:100%;
-padding:12px;
-background:#0077ff;
-color:#fff;
-border:none;
-border-radius:8px;
-cursor:pointer;
+.box {
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.box h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.box p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0077ff;
+  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.1);
+}
+
+input:hover {
+  border-color: #0077ff;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover:not(:disabled) {
+  background: #0056cc;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 119, 255, 0.3);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secondary-btn {
+  background: #f0f0f0;
+  color: #333;
+  margin-top: 10px;
+}
+
+.secondary-btn:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.back-btn {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.back-btn button {
+  margin: 0;
+  width: auto;
+  padding: 10px 20px;
+  background: none;
+  color: #0077ff;
+  text-decoration: underline;
+}
+
+.back-btn button:hover {
+  background: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.otp-info {
+  background: #f0f8ff;
+  border-left: 4px solid #0077ff;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+#otp-form {
+  display: none;
+}
+
+.resend-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.resend-link button {
+  background: none;
+  border: none;
+  color: #0077ff;
+  text-decoration: underline;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0;
+}
+
+.resend-link button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .box {
+    padding: 30px 20px;
+  }
+
+  input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 }
 </style>
 
@@ -70,20 +309,73 @@ cursor:pointer;
 
 <body>
 
-<div class="box">
+<div class="container">
+  <div class="box">
 
-<h2>Email OTP Login</h2>
+    <!-- Email Form -->
+    <div id="email-form">
+      <h2>🔐 Login</h2>
+      <p>Enter your email to receive an OTP</p>
+      
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          placeholder="Enter your email"
+          oninput="window.sendOTPAuto()"
+          autocomplete="email"
+          required>
+      </div>
+    </div>
 
-<input
-type="email"
-id="email"
-placeholder="Enter Your Email">
+    <!-- OTP Form -->
+    <div id="otp-form">
+      <h2>✅ Verify OTP</h2>
+      <p>Check your email for the OTP</p>
+      
+      <div class="otp-info">
+        <strong>OTP sent to:</strong> <span id="email-display"></span>
+      </div>
+      
+      <div class="form-group">
+        <label for="otp-input">Enter 6-digit OTP</label>
+        <input 
+          type="text" 
+          id="otp-input" 
+          placeholder="000000"
+          maxlength="6"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          required>
+      </div>
 
-<button onclick="sendOTP()">
-Send OTP
-</button>
+      <button id="verify-btn" onclick="window.verifyOTP()">Verify OTP</button>
+      
+      <div class="back-btn">
+        <button onclick="window.goBackToEmail()">← Change Email</button>
+      </div>
 
+      <div class="resend-link">
+        <p>Didn't receive OTP? <button onclick="window.sendOTPAuto()">Resend</button></p>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<script>
+// Show email when OTP form appears
+document.addEventListener('DOMContentLoaded', () => {
+  const otp = document.getElementById('otp-form');
+  const observer = new MutationObserver(() => {
+    if (otp.style.display !== 'none' && window.authState.email) {
+      document.getElementById('email-display').textContent = window.authState.email;
+    }
+  });
+  observer.observe(otp, { attributes: true });
+});
+</script>
 
 </body>
 </html>
