@@ -5,77 +5,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up</title>
 
-<script type="module">
-
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-const supabase=createClient(
-"https://yefjfcrevavskvxzkkub.supabase.co",
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGIuWajAfhLhiUE"
-);
-
-window.signup=async()=>{
-
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
-
-const {error}=await supabase.auth.signUp({
-email,
-password
-});
-
-if(error){
-alert(error.message);
-}else{
-alert("Account Created Successfully! Check your Email.");
-window.location="login.html";
-}
-
-}
-
-</script>
-
 <style>
-
-body{
-font-family:Arial;
-background:#0077ff;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.box{
-background:white;
-padding:30px;
-width:350px;
-border-radius:15px;
-box-shadow:0 10px 20px rgba(0,0,0,.2);
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0077ff 0%, #00d4ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:1px solid #ccc;
-border-radius:8px;
+.box {
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
 }
 
-button{
-width:100%;
-padding:12px;
-background:#0077ff;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-a{
-text-decoration:none;
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 28px;
 }
 
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0077ff;
+  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.1);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover:not(:disabled) {
+  background: #0056cc;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 119, 255, 0.3);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.link-section {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.link-section p {
+  font-size: 14px;
+  color: #666;
+}
+
+.link-section a {
+  color: #0077ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-section a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  background: #fff1f2;
+  border: 1px solid #f43f5e;
+  color: #9f1239;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: none;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .box {
+    padding: 30px 20px;
+  }
+  
+  input {
+    font-size: 16px;
+  }
+}
 </style>
 
 </head>
@@ -83,20 +159,134 @@ text-decoration:none;
 <body>
 
 <div class="box">
+  <h2>📝 Create Account</h2>
+  <p class="subtitle">Sign up for free</p>
+  
+  <div class="error" id="error-msg"></div>
+  
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input 
+      type="email" 
+      id="email" 
+      placeholder="your@email.com"
+      autocomplete="email"
+      required>
+  </div>
 
-<h2>Create Account</h2>
+  <div class="form-group">
+    <label for="password">Password (min 6 characters)</label>
+    <input 
+      type="password" 
+      id="password" 
+      placeholder="Create a strong password"
+      autocomplete="new-password"
+      required>
+  </div>
 
-<input type="email" id="email" placeholder="Email">
+  <div class="form-group">
+    <label for="confirm-password">Confirm Password</label>
+    <input 
+      type="password" 
+      id="confirm-password" 
+      placeholder="Re-enter password"
+      autocomplete="new-password"
+      required>
+  </div>
 
-<input type="password" id="password" placeholder="Password">
+  <button id="signup-btn" onclick="signup()">Sign Up ✓</button>
 
-<button onclick="signup()">Sign Up</button>
-
-<p>Already have an account?
-<a href="login.html">Login</a>
-</p>
-
+  <div class="link-section">
+    <p>Already have an account?</p>
+    <a href="login.html">Login here →</a>
+  </div>
 </div>
+
+<script>
+function showError(msg) {
+  const errorDiv = document.getElementById('error-msg');
+  errorDiv.textContent = msg;
+  errorDiv.style.display = 'block';
+  setTimeout(() => {
+    errorDiv.style.display = 'none';
+  }, 4000);
+}
+
+window.signup = async () => {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+  const btn = document.getElementById('signup-btn');
+
+  // Validation
+  if (!email) {
+    showError('Please enter an email address');
+    return;
+  }
+
+  if (!email.includes('@')) {
+    showError('Please enter a valid email');
+    return;
+  }
+
+  if (!password) {
+    showError('Please enter a password');
+    return;
+  }
+
+  if (password.length < 6) {
+    showError('Password must be at least 6 characters');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    showError('Passwords do not match');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Creating account...';
+
+  try {
+    // Get existing users
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    // Check if email already exists
+    if (users.some(u => u.email === email)) {
+      showError('Email already registered. Please login or use another email.');
+      btn.disabled = false;
+      btn.textContent = 'Sign Up ✓';
+      return;
+    }
+
+    // Create new user
+    const newUser = {
+      id: Date.now().toString(),
+      email: email,
+      password: btoa(password), // Simple encoding (not secure for production)
+      createdAt: new Date().toISOString()
+    };
+
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert('✅ Account created successfully! Now login with your credentials.');
+    window.location.href = 'login.html';
+  } catch (err) {
+    showError('Error creating account: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Sign Up ✓';
+  }
+};
+
+// Check if already logged in
+window.addEventListener('load', () => {
+  const currentUser = localStorage.getItem('currentUser');
+  if (currentUser) {
+    window.location.href = 'dashboard.html';
+  }
+});
+</script>
 
 </body>
 </html>
