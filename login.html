@@ -5,16 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login | My Business</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:linear-gradient(135deg,#0066ff,#00c6ff);padding:20px}
-.login-box{width:390px;max-width:100%;background:white;padding:40px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.2);text-align:center}
-.logo{font-size:28px;font-weight:bold;color:#0066ff;margin-bottom:10px}
-h1{margin:10px 0}.subtitle{color:#777;margin-bottom:25px}
-input{width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:10px;font-size:15px}
-button{width:100%;padding:14px;margin-top:12px;border:0;border-radius:10px;font-size:16px;cursor:pointer}
-.login-btn{background:#0066ff;color:white}.google-btn{border:1px solid #ddd;background:white;color:#222}.google-btn:hover{background:#f5f5f5}
-button:disabled{opacity:.6;cursor:not-allowed}.divider{margin:20px 0;color:#999}a{color:#0066ff;text-decoration:none;font-weight:bold}
-#message{margin-top:15px;color:#d00;font-size:14px;min-height:18px}
+*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:linear-gradient(135deg,#0066ff,#00c6ff);padding:20px}.login-box{width:390px;max-width:100%;background:white;padding:40px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.2);text-align:center}.logo{font-size:28px;font-weight:bold;color:#0066ff;margin-bottom:10px}h1{margin:10px 0}.subtitle{color:#777;margin-bottom:25px}input{width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:10px;font-size:15px}button{width:100%;padding:14px;margin-top:12px;border:0;border-radius:10px;font-size:16px;cursor:pointer}.login-btn{background:#0066ff;color:white}.google-btn{border:1px solid #ddd;background:white;color:#222}.google-btn:hover{background:#f5f5f5}button:disabled{opacity:.6;cursor:not-allowed}.divider{margin:20px 0;color:#999}a{color:#0066ff;text-decoration:none;font-weight:bold}#message{margin-top:15px;color:#d00;font-size:14px;min-height:18px}
 </style>
 </head>
 <body>
@@ -32,60 +23,11 @@ button:disabled{opacity:.6;cursor:not-allowed}.divider{margin:20px 0;color:#999}
 </div>
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-const supabase = createClient(
-  "https://yefjfcrevavskvxzkkub.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGIuWajAfhLhiUE"
-);
-
-const HOME_URL = "https://rudar6511-dot.github.io/My-business-website/";
-
-function showMessage(text){
-  document.getElementById("message").textContent = text;
-}
-
-window.login = async function(){
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const btn = document.getElementById("loginBtn");
-
-  if(!email || !password){
-    showMessage("Please enter email and password.");
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = "Logging in...";
-
-  const { error } = await supabase.auth.signInWithPassword({email,password});
-
-  if(error){
-    showMessage(error.message);
-    btn.disabled = false;
-    btn.textContent = "Login";
-    return;
-  }
-
-  window.location.href = "dashboard.html";
-};
-
-window.googleLogin = async function(){
-  const btn = document.getElementById("googleBtn");
-  btn.disabled = true;
-  btn.textContent = "Opening Google...";
-  showMessage("");
-
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: HOME_URL }
-  });
-
-  if(error){
-    showMessage(error.message);
-    btn.disabled = false;
-    btn.textContent = "🔵 Continue with Google";
-  }
-};
+const supabase=createClient("https://yefjfcrevavskvxzkkub.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllZmpmY3JldmF2c2t2eHpra3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3NzUxMjcsImV4cCI6MjA5OTM1MTEyN30.w7n3wBB4rEbq8Cg2RpOlg-bNnLjwrGIuWajAfLhUE");
+const HOME_URL="https://rudar6511-dot.github.io/My-business-website/";
+function showMessage(text){document.getElementById("message").textContent=text;}
+window.login=async function(){const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value,btn=document.getElementById("loginBtn");if(!email||!password){showMessage("Please enter email and password.");return;}btn.disabled=true;btn.textContent="Logging in...";const{error}=await supabase.auth.signInWithPassword({email,password});if(error){showMessage(error.message);btn.disabled=false;btn.textContent="Login";return;}window.location.href=HOME_URL;};
+window.googleLogin=async function(){const btn=document.getElementById("googleBtn");btn.disabled=true;btn.textContent="Opening Google...";const{error}=await supabase.auth.signInWithOAuth({provider:"google",options:{redirectTo:HOME_URL}});if(error){showMessage(error.message);btn.disabled=false;btn.textContent="🔵 Continue with Google";}};
 </script>
 </body>
 </html>
