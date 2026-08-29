@@ -1,416 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Professional website design, digital marketing and business consulting to help you build and grow your business." />
-  <meta name="author" content="My Business" />
-  <title>My Business — Website Design · Digital Marketing · Consulting</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="images/og-image.svg">
-
-  <!-- Open Graph (for sharing preview) -->
-  <meta property="og:title" content="My Business — Website Design & Digital Solutions" />
-  <meta property="og:description" content="Modern websites, digital marketing and business consulting to grow your brand." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://your-domain.example/" />
-  <meta property="og:image" content="images/og-image.svg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Optional: Google font -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <meta name="theme-color" content="#0b6efd">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Professional website design, digital marketing and business consulting to help you build and grow your business.">
+<meta name="author" content="My Business">
+<title>My Business — Website Design · Digital Marketing · Consulting</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="images/og-image.svg">
+<meta property="og:title" content="My Business — Website Design & Digital Solutions">
+<meta property="og:description" content="Modern websites, digital marketing and business consulting to grow your brand.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0b6efd">
+<style>
+.user-avatar-link{display:flex!important;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;overflow:hidden}
+.user-avatar-img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #0b6efd;display:block}
+.user-avatar-fallback{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0b6efd,#00c6ff);color:#fff;font-weight:700;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <a href="/" aria-label="My Business home">
-          <span class="logo">MY BUSINESS</span>
-        </a>
-      </div>
-
-      <nav class="site-nav" aria-label="Primary navigation">
-    <ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="services.html">Services</a></li>
-  <li><a href="contact.html">Contact</a></li>
-
-  <li><a href="login.html">Login</a></li>
-  <li><a href="signup.html">Sign Up</a></li>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+<div class="container header-inner">
+<div class="brand"><a href="index.html" aria-label="My Business home"><span class="logo">MY BUSINESS</span></a></div>
+<nav class="site-nav" aria-label="Primary navigation">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="contact.html">Contact</a></li>
 </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <section id="home" class="hero">
-      <div class="container hero-inner">
-        <h1>Build Your Dream Business</h1>
-        <p class="lead">Professional website design, digital marketing, and business consulting to help you grow.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#services">Our Services</a>
-          <a class="btn outline" href="#contact">Get a Quote</a>
-        </div>
-      </div>
-    </section>
-<section class="portfolio" id="portfolio">
-  <h2>Logo Design Samples</h2>
-  <p>Some sample logo styles for your business.</p>
-
-  <div class="logo-grid">
-
-    <div class="logo-sample">
-      <div class="sample-logo tech-logo">NEXA</div>
-      <h3>Tech Logo</h3>
-      <p>Modern logo for technology brands.</p>
-    </div>
-
-    <div class="logo-sample">
-      <div class="sample-logo food-logo">TastyBite</div>
-      <h3>Food Logo</h3>
-      <p>Creative logo for restaurants and cafes.</p>
-    </div>
-
-    <div class="logo-sample">
-      <div class="sample-logo fashion-logo">LUXE</div>
-      <h3>Fashion Logo</h3>
-      <p>Premium logo for fashion brands.</p>
-    </div>
-
-    <div class="logo-sample">
-      <div class="sample-logo shop-logo">URBAN MART</div>
-      <h3>Shop Logo</h3>
-      <p>Clean logo for online stores.</p>
-    </div>
-
-    <div class="logo-sample">
-      <div class="sample-logo fitness-logo">FIT PRO</div>
-      <h3>Fitness Logo</h3>
-      <p>Strong logo for gyms and trainers.</p>
-    </div>
-
-    <div class="logo-sample">
-      <div class="sample-logo travel-logo">SKY TRAVEL</div>
-      <h3>Travel Logo</h3>
-      <p>Fresh logo for travel businesses.</p>
-    </div>
-
-  </div>
-</section>
-    <section id="services" class="services">
-      <div class="container">
-        <h2>Our Services</h2>
-        <p class="section-sub">Tailored solutions that deliver measurable results.</p>
-
-        <div class="cards">
-          <article class="card" aria-labelledby="webdesign-title">
-            <img src="images/web.svg" alt="Web Design icon" width="70" height="70" />
-            <h3 id="webdesign-title">Web Design</h3>
-            <p>Modern responsive websites with user-focused interfaces and fast performance.</p>
-            <a class="read-btn" href="webdesign.html">Read More</a>
-          </article>
-
-          <article class="card" aria-labelledby="marketing-title">
-            <img src="images/marketing.svg" alt="Digital Marketing icon" width="70" height="70" />
-            <h3 id="marketing-title">Digital Marketing</h3>
-            <p>SEO, social media and paid advertising strategies to grow traffic and sales.</p>
-            <a class="read-btn" href="marketing.html">Read More</a>
-          </article>
-
-          <article class="card" aria-labelledby="consulting-title">
-            <img src="images/business.svg" alt="Business Consulting icon" width="70" height="70" />
-            <h3 id="consulting-title">Business Consulting</h3>
-            <p>Practical business advice and plans to accelerate growth and profitability.</p>
-            <a class="read-btn" href="consulting.html">Read More</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="pricing" class="pricing">
-      <div class="container">
-        <h2>Logo Pricing</h2>
-        <p class="section-sub">Choose a logo package that fits your brand and budget. Prices shown are base package rates (INR).</p>
-
-        <div class="pricing-cards">
-          <div class="pricing-card">
-            <h3>Minimal Logo</h3>
-            <p class="price">₹60</p>
-            <p>Simple, clean, and modern — suitable for web and social use.</p>
-          </div>
-
-          <div class="pricing-card">
-            <h3>Vintage Logo</h3>
-            <p class="price">₹90</p>
-            <p>Classic, timeless designs with retro elements and textures.</p>
-          </div>
-
-          <div class="pricing-card">
-            <h3>3D Logo</h3>
-            <p class="price">₹150</p>
-            <p>Stylized 3D look for stronger visual presence (digital use).</p>
-          </div>
-
-          <div class="pricing-card">
-            <h3>Luxury Logo</h3>
-            <p class="price">₹200</p>
-            <p>High-end, detailed logos with premium styling for brands.</p>
-          </div>
-        </div>
-
-        <p class="note">Note: Revisions, custom requests, or additional file formats may change final price. Contact us for a custom quote.</p>
-      </div>
-    </section>
-
-    <section id="order" class="order">
-      <div class="container">
-        <h2>Order a Logo</h2>
-        <p class="section-sub">Fill the form to place a logo order. We will contact you within 24 hours.</p>
-
-        <form class="form order-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate enctype="multipart/form-data">
-          <label for="o-name">Your Name</label>
-          <input id="o-name" name="name" type="text" placeholder="Your Name" required>
-
-          <label for="o-email">Email</label>
-          <input id="o-email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="o-whatsapp">WhatsApp Number</label>
-          <input id="o-whatsapp" name="whatsapp" type="tel" placeholder="+91XXXXXXXXXX" required>
-
-          <label for="o-business">Business Name</label>
-          <input id="o-business" name="business" type="text" placeholder="Business Name" required>
-
-          <label for="o-style">Logo Style</label>
-          <select id="o-style" name="style" required>
-            <option value="Minimal" data-price="60">Minimal — ₹60</option>
-            <option value="Vintage" data-price="90">Vintage — ₹90</option>
-            <option value="3D" data-price="150">3D — ₹150</option>
-            <option value="Luxury" data-price="200">Luxury — ₹200</option>
-          </select>
-
-          <!-- New: Color selection -->
-          <fieldset>
-            <legend>Preferred Colors</legend>
-            <label for="o-primary-color">Primary color</label>
-            <input id="o-primary-color" name="primary_color" type="color" value="#0b6efd">
-
-            <label for="o-secondary-color">Secondary color</label>
-            <input id="o-secondary-color" name="secondary_color" type="color" value="#ffffff">
-
-            <label for="o-color-notes">Other color notes</label>
-            <input id="o-color-notes" name="color_notes" type="text" placeholder="E.g. brand colors, avoid neon, prefer muted tones">
-          </fieldset>
-
-          <!-- New: Shape selection -->
-          <label for="o-shape">Preferred logo shape</label>
-          <select id="o-shape" name="shape">
-            <option value="Any">Any</option>
-            <option value="Wordmark">Wordmark (text based)</option>
-            <option value="Lettermark">Lettermark / Monogram</option>
-            <option value="Emblem">Emblem / Badge</option>
-            <option value="Abstract">Abstract mark</option>
-            <option value="Icon">Icon / Symbol</option>
-            <option value="Mascot">Mascot</option>
-            <option value="Combination">Combination mark</option>
-          </select>
-
-          <!-- New: Design elements (checkboxes) -->
-          <fieldset>
-            <legend>Design elements you'd like</legend>
-            <label><input type="checkbox" name="elements" value="Monogram"> Monogram / Initials</label>
-            <label><input type="checkbox" name="elements" value="Symbol"> Symbol / Icon</label>
-            <label><input type="checkbox" name="elements" value="Mascot"> Mascot</label>
-            <label><input type="checkbox" name="elements" value="Typography"> Typography-focused</label>
-            <label><input type="checkbox" name="elements" value="Badge"> Badge / Emblem</label>
-            <label><input type="checkbox" name="elements" value="Minimal"> Minimal / Flat</label>
-            <label><input type="checkbox" name="elements" value="3D"> 3D / Gradient</label>
-          </fieldset>
-
-          <!-- New: Reference upload -->
-          <label for="o-references">Reference images (optional)</label>
-          <input id="o-references" name="references" type="file" accept="image/*" multiple>
-
-          <p>Selected package price: <strong id="selected-price">₹1,600</strong></p>
-          <input type="hidden" name="price" id="o-price" value="1600">
-
-          <label for="o-details">Logo Details</label>
-          <textarea id="o-details" name="details" placeholder="Describe your idea (colors, symbols, usage)..." rows="5"></textarea>
-
-          <!-- Optional: redirect after submit -->
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="thank-you.html">
-
-          <button class="btn primary" type="submit">Place Order</button>
-        </form>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Contact Us</h2>
-        <p class="section-sub">Have questions? Send a message and we'll respond shortly.</p>
-
-        <form class="form contact-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate>
-          <label for="c-name">Name</label>
-          <input id="c-name" name="name" type="text" placeholder="Your Name" required>
-
-          <label for="c-email">Email</label>
-          <input id="c-email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="c-subject">Subject</label>
-          <input id="c-subject" name="subject" type="text" placeholder="Subject">
-
-          <label for="c-message">Message</label>
-          <textarea id="c-message" name="message" placeholder="Your message..." rows="6" required></textarea>
-
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="thank-you.html">
-
-          <button class="btn primary" type="submit">Send Message</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 My Business — All Rights Reserved</p>
-      <nav aria-label="Footer">
-        <ul>
-          <li><a href="/privacy.html">Privacy</a></li>
-          <li><a href="/terms.html">Terms</a></li>
-        </ul>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- Script: update selected price in the order form -->
-  <script>
-    (function(){
-      var styleSelect = document.getElementById('o-style');
-      var priceInput = document.getElementById('o-price');
-      var priceDisplay = document.getElementById('selected-price');
-
-      function formatINR(n){
-        return '₹' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
-
-      function updatePrice(){
-        var opt = styleSelect.options[styleSelect.selectedIndex];
-        var p = opt.getAttribute('data-price') || '0';
-        priceInput.value = p;
-        priceDisplay.textContent = formatINR(p);
-      }
-
-      styleSelect.addEventListener('change', updatePrice);
-      // initialize on load
-      updatePrice();
-    })();
-  </script>
-
-  <!-- AJAX form submit for Formsubmit.co (improves user feedback) -->
-  <script>
-    (function(){
-      // Find all forms that submit to formsubmit.co
-      var forms = document.querySelectorAll('form[action*="formsubmit.co"]');
-      if(!forms || forms.length === 0) return;
-
-      forms.forEach(function(form){
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          var submitBtn = form.querySelector('button[type="submit"]');
-          if(submitBtn){ submitBtn.disabled = true; var origText = submitBtn.textContent; submitBtn.textContent = 'Sending...'; }
-
-          var action = form.getAttribute('action');
-          // switch to AJAX endpoint
-          var ajaxUrl = action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
-
-          var fd = new FormData(form);
-
-          // remove any previous messages
-          var prev = form.parentNode.querySelector('.form-success, .form-error');
-          if(prev) prev.remove();
-
-          fetch(ajaxUrl, {
-            method: 'POST',
-            body: fd,
-            headers: { 'Accept': 'application/json' }
-          })
-          .then(function(response){
-            if(!response.ok){
-              return response.text().then(function(text){ throw { status: response.status, body: text }; });
-            }
-            // try parse json, fall back to text
-            return response.text().then(function(text){
-              try{ return JSON.parse(text); }catch(e){ return { message: text }; }
-            });
-          })
-          .then(function(data){
-            // show success message
-            var msg = document.createElement('div');
-            msg.className = 'form-success';
-            msg.style.padding = '12px';
-            msg.style.marginTop = '12px';
-            msg.style.background = '#ecfdf5';
-            msg.style.border = '1px solid #10b981';
-            msg.style.color = '#065f46';
-            msg.textContent = data.message || 'Thank you — your submission has been received.';
-            form.parentNode.insertBefore(msg, form.nextSibling);
-
-            // optional redirect if _next provided
-            var next = form.querySelector('input[name="_next"]');
-            if(next && next.value){
-              setTimeout(function(){ window.location.href = next.value; }, 1200);
-            }
-
-            form.reset();
-            if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = origText; }
-          })
-          .catch(function(err){
-            console.error('Form submit error:', err);
-            var emsg = document.createElement('div');
-            emsg.className = 'form-error';
-            emsg.style.padding = '12px';
-            emsg.style.marginTop = '12px';
-            emsg.style.background = '#fff1f2';
-            emsg.style.border = '1px solid #f43f5e';
-            emsg.style.color = '#9f1239';
-            if(err && err.status){
-              // Common cause: email not verified (Formsubmit returns 403/422)
-              emsg.innerHTML = '<strong>Submission failed (status: ' + err.status + ').</strong> Please ensure your email (rudar6511@gmail.com) is verified with formsubmit.co and try again.' + (err.body ? '<br><small>' + escapeHtml(err.body) + '</small>' : '');
-            } else {
-              emsg.textContent = 'Submission failed. Please try again or contact us directly.';
-            }
-            form.parentNode.insertBefore(emsg, form.nextSibling);
-            if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = origText; }
-          });
-        });
-      });
-
-      // helper to escape HTML when showing server response
-      function escapeHtml(str){
-        if(!str) return '';
-        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
-      }
-    })();
-  </script>
-
+</nav>
+</div>
+</header>
+<main id="main">
+<section id="home" class="hero"><div class="container hero-inner"><h1>Build Your Dream Business</h1><p class="lead">Professional website design, digital marketing, and business consulting to help you grow.</p><div class="hero-actions"><a class="btn primary" href="#services">Our Services</a><a class="btn outline" href="#contact">Get a Quote</a></div></div></section>
+<section class="portfolio" id="portfolio"><h2>Logo Design Samples</h2><p>Some sample logo styles for your business.</p><div class="logo-grid">
+<div class="logo-sample"><div class="sample-logo tech-logo">NEXA</div><h3>Tech Logo</h3><p>Modern logo for technology brands.</p></div>
+<div class="logo-sample"><div class="sample-logo food-logo">TastyBite</div><h3>Food Logo</h3><p>Creative logo for restaurants and cafes.</p></div>
+<div class="logo-sample"><div class="sample-logo fashion-logo">LUXE</div><h3>Fashion Logo</h3><p>Premium logo for fashion brands.</p></div>
+<div class="logo-sample"><div class="sample-logo shop-logo">URBAN MART</div><h3>Shop Logo</h3><p>Clean logo for online stores.</p></div>
+<div class="logo-sample"><div class="sample-logo fitness-logo">FIT PRO</div><h3>Fitness Logo</h3><p>Strong logo for gyms and trainers.</p></div>
+<div class="logo-sample"><div class="sample-logo travel-logo">SKY TRAVEL</div><h3>Travel Logo</h3><p>Fresh logo for travel businesses.</p></div>
+</div></section>
+<section id="services" class="services"><div class="container"><h2>Our Services</h2><p class="section-sub">Tailored solutions that deliver measurable results.</p><div class="cards">
+<article class="card"><img src="images/web.svg" alt="Web Design icon" width="70" height="70"><h3>Web Design</h3><p>Modern responsive websites with user-focused interfaces and fast performance.</p><a class="read-btn" href="webdesign.html">Read More</a></article>
+<article class="card"><img src="images/marketing.svg" alt="Digital Marketing icon" width="70" height="70"><h3>Digital Marketing</h3><p>SEO, social media and paid advertising strategies to grow traffic and sales.</p><a class="read-btn" href="marketing.html">Read More</a></article>
+<article class="card"><img src="images/business.svg" alt="Business Consulting icon" width="70" height="70"><h3>Business Consulting</h3><p>Practical business advice and plans to accelerate growth and profitability.</p><a class="read-btn" href="consulting.html">Read More</a></article>
+</div></div></section>
+<section id="pricing" class="pricing"><div class="container"><h2>Logo Pricing</h2><p class="section-sub">Choose a logo package that fits your brand and budget. Prices shown are base package rates (INR).</p><div class="pricing-cards">
+<div class="pricing-card"><h3>Minimal Logo</h3><p class="price">₹60</p><p>Simple, clean, and modern — suitable for web and social use.</p></div>
+<div class="pricing-card"><h3>Vintage Logo</h3><p class="price">₹90</p><p>Classic, timeless designs with retro elements and textures.</p></div>
+<div class="pricing-card"><h3>3D Logo</h3><p class="price">₹150</p><p>Stylized 3D look for stronger visual presence (digital use).</p></div>
+<div class="pricing-card"><h3>Luxury Logo</h3><p class="price">₹200</p><p>High-end, detailed logos with premium styling for brands.</p></div>
+</div><p class="note">Note: Revisions, custom requests, or additional file formats may change final price. Contact us for a custom quote.</p></div></section>
+<section id="order" class="order"><div class="container"><h2>Order a Logo</h2><p class="section-sub">Fill the form to place a logo order. We will contact you within 24 hours.</p>
+<form class="form order-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate enctype="multipart/form-data">
+<label for="o-name">Your Name</label><input id="o-name" name="name" type="text" placeholder="Your Name" required>
+<label for="o-email">Email</label><input id="o-email" name="email" type="email" placeholder="you@example.com" required>
+<label for="o-whatsapp">WhatsApp Number</label><input id="o-whatsapp" name="whatsapp" type="tel" placeholder="+91XXXXXXXXXX" required>
+<label for="o-business">Business Name</label><input id="o-business" name="business" type="text" placeholder="Business Name" required>
+<label for="o-style">Logo Style</label><select id="o-style" name="style" required><option value="Minimal" data-price="60">Minimal — ₹60</option><option value="Vintage" data-price="90">Vintage — ₹90</option><option value="3D" data-price="150">3D — ₹150</option><option value="Luxury" data-price="200">Luxury — ₹200</option></select>
+<fieldset><legend>Preferred Colors</legend><label for="o-primary-color">Primary color</label><input id="o-primary-color" name="primary_color" type="color" value="#0b6efd"><label for="o-secondary-color">Secondary color</label><input id="o-secondary-color" name="secondary_color" type="color" value="#ffffff"><label for="o-color-notes">Other color notes</label><input id="o-color-notes" name="color_notes" type="text" placeholder="E.g. brand colors, avoid neon, prefer muted tones"></fieldset>
+<label for="o-shape">Preferred logo shape</label><select id="o-shape" name="shape"><option value="Any">Any</option><option value="Wordmark">Wordmark (text based)</option><option value="Lettermark">Lettermark / Monogram</option><option value="Emblem">Emblem / Badge</option><option value="Abstract">Abstract mark</option><option value="Icon">Icon / Symbol</option><option value="Mascot">Mascot</option><option value="Combination">Combination mark</option></select>
+<fieldset><legend>Design elements you'd like</legend><label><input type="checkbox" name="elements" value="Monogram"> Monogram / Initials</label><label><input type="checkbox" name="elements" value="Symbol"> Symbol / Icon</label><label><input type="checkbox" name="elements" value="Mascot"> Mascot</label><label><input type="checkbox" name="elements" value="Typography"> Typography-focused</label><label><input type="checkbox" name="elements" value="Badge"> Badge / Emblem</label><label><input type="checkbox" name="elements" value="Minimal"> Minimal / Flat</label><label><input type="checkbox" name="elements" value="3D"> 3D / Gradient</label></fieldset>
+<label for="o-references">Reference images (optional)</label><input id="o-references" name="references" type="file" accept="image/*" multiple>
+<p>Selected package price: <strong id="selected-price">₹60</strong></p><input type="hidden" name="price" id="o-price" value="60">
+<label for="o-details">Logo Details</label><textarea id="o-details" name="details" placeholder="Describe your idea (colors, symbols, usage)..." rows="5"></textarea>
+<input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="thank-you.html"><button class="btn primary" type="submit">Place Order</button>
+</form></div></section>
+<section id="contact" class="contact"><div class="container"><h2>Contact Us</h2><p class="section-sub">Have questions? Send a message and we'll respond shortly.</p>
+<form class="form contact-form" action="https://formsubmit.co/rudar6511@gmail.com" method="POST" novalidate>
+<label for="c-name">Name</label><input id="c-name" name="name" type="text" placeholder="Your Name" required>
+<label for="c-email">Email</label><input id="c-email" name="email" type="email" placeholder="you@example.com" required>
+<label for="c-subject">Subject</label><input id="c-subject" name="subject" type="text" placeholder="Subject">
+<label for="c-message">Message</label><textarea id="c-message" name="message" placeholder="Your message..." rows="6" required></textarea>
+<input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="thank-you.html"><button class="btn primary" type="submit">Send Message</button>
+</form></div></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><p>© 2026 My Business — All Rights Reserved</p><nav aria-label="Footer"><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></nav></div></footer>
+<script>
+(function(){
+const styleSelect=document.getElementById('o-style'),priceInput=document.getElementById('o-price'),priceDisplay=document.getElementById('selected-price');
+function formatINR(n){return '₹'+Number(n).toLocaleString('en-IN');}
+function updatePrice(){const opt=styleSelect.options[styleSelect.selectedIndex];const p=opt.getAttribute('data-price')||'0';priceInput.value=p;priceDisplay.textContent=formatINR(p);}
+if(styleSelect){styleSelect.addEventListener('change',updatePrice);updatePrice();}
+})();
+</script>
+<script type="module" src="auth.js"></script>
 </body>
 </html>
-<section class="portfolio" id="portfolio">
-  <h2>Logo Design Samples</h2>
-  <p>Some sample logo designs for different businesses.</p>
-
-  <img src="logo-samples.png" alt="Logo design samples" class="portfolio-image">
-</section>
