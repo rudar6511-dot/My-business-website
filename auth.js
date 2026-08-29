@@ -7,26 +7,27 @@ const supabase = createClient(
 
 const HOME_URL = "https://rudar6511-dot.github.io/My-business-website/";
 
-// Google Login
 window.googleLogin = async function () {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: { redirectTo: HOME_URL }
   });
-
   if (error) alert(error.message);
 };
 
 function initials(name, email) {
-  const value = (name || email || "U").trim();
+  const value = (name || email || "User").trim();
   const parts = value.split(/\s+/).filter(Boolean);
-  if (parts.length > 1) return (parts[0][0] + parts[1][0]).toUpperCase();
-  return value.slice(0, 2).toUpperCase();
+  return parts.length > 1
+    ? (parts[0][0] + parts[1][0]).toUpperCase()
+    : value.slice(0, 2).toUpperCase();
 }
 
 function showUserAvatar(user) {
   const nav = document.querySelector(".site-nav ul");
   if (!nav || !user) return;
+
+  document.querySelectorAll(".site-nav .auth-link").forEach(el => el.remove());
 
   let item = document.getElementById("user-avatar-item");
   if (!item) {
@@ -37,13 +38,13 @@ function showUserAvatar(user) {
 
   const name = user.user_metadata?.full_name || user.user_metadata?.name || user.email || "User";
   const avatar = user.user_metadata?.avatar_url || user.user_metadata?.picture || "";
+  const safeName = String(name).replace(/"/g, "&quot;");
 
   item.innerHTML = `
-    <a href="dashboard.html" aria-label="Open your account" title="${name.replace(/\"/g, "&quot;")}" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+    <a href="dashboard.html" aria-label="Open your account" title="${safeName}" class="user-avatar-link">
       ${avatar
-        ? `<img src="${avatar}" alt="${name.replace(/\"/g, "&quot;")}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #0b6efd;">`
-        : `<span style="width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0b6efd,#00c6ff);color:#fff;font-weight:700;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15);">${initials(name, user.email)}</span>`
-      }
+        ? `<img src="${avatar}" alt="${safeName}" class="user-avatar-img">`
+        : `<span class="user-avatar-fallback">${initials(name, user.email)}</span>`}
     </a>`;
 }
 
